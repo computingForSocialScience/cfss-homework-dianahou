@@ -13,7 +13,7 @@ def fetchArtistId(name):
     artist_id = artist_data["artists"]["items"][0]["id"]
     return artist_id
 
-print fetchArtistId('Tania Bowra')
+
 
 
 def fetchArtistInfo(artist_id):
@@ -33,5 +33,8 @@ def fetchArtistInfo(artist_id):
     artist_dict['popularity'] = artist_data["popularity"]
     return artist_dict
 
-print fetchArtistInfo(fetchArtistId('beyonce'))
+if __name__ == '__main__':
+    print fetchArtistId('Tania Bowra')
+    print fetchArtistInfo(fetchArtistId('beyonce'))
+
 
