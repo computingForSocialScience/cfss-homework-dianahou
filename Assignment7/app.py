@@ -1,5 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for
 import pymysql
+import networkx as nx
+import pandas as pd
+import random
+from io import open
+from fetchArtist import *
+from fetch Albums import *
+from artistNetworks import getEdgeList
+from analyzeNetworks import randomCentralNode, pandasToNetworkX
+
 
 dbname="playlists"
 host="localhost"
@@ -8,6 +17,27 @@ passwd=""
 db=pymysql.connect(db=dbname, host=host, user=user,passwd=passwd, charset='utf8')
 
 app = Flask(__name__)
+
+def createNewPlaylist(artist_name):
+    cur = db.cursor()
+    cur.execute('''CREATE TABLE IF NOT EXISTS playlists (id INTEGER PRIMARY KEY AUTO_INCREMENT, rootArtist VARCHAR(128));''')
+    cur.execute('''CREATE TABLE IF NOT EXISTS songs (playlistId INTEGER, songOrder INTEGER, artistName VARCHAR(128), albumName VARCHAR(256));''')
+
+    artists_id = fetchArtistId(artist_name)
+    edge_list = getEdgeList(artists_id, 2)
+    g = pandasToNetworkX(edge_list)
+
+    randomArtists=[]
+
+    limit = 30
+    while limit > 0:
+        random_artist = randomCentralNode(G)
+        album_id_list = fetchAlbumIds(random_artist)
+        if album_id_list == []:
+            pass
+        else:
+            randomArtists.append(random_artist)
+            limit -= 1
 
 
 @app.route('/')
