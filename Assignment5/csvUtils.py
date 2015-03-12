@@ -28,6 +28,7 @@ def writeArtistsTable(artist_info_list):
         popularity = artist_info_list[artistIndex]["popularity"]
 
         #line = u'%s, "%s", %d, %d\n' %  (ID, name, followers, popularity)
+        #f.write(line)
         f.write(ID + "," + '"'+name+'"' +","+str(followers)+","+str(popularity) + '\n')
     f.close()
 
@@ -63,7 +64,8 @@ def writeAlbumsTable(album_info_list):
         album_name = album["name"]
         album_year = album["year"]
         album_popularity = album["popularity"]
-        
+        #line = u'%s, %s, "%s", %d, %d\n' %  (artist_id, album_id, album_name, album_year, album_popularity)
+        #g.write(line)
         g.write(artist_id + "," + album_id +","+ '"'+album_name+'"' +","+str(album_year)+","+str(album_popularity) + '\n')
     g.close()
 

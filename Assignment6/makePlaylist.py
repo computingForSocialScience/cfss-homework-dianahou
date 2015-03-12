@@ -24,7 +24,7 @@ for i in range(len(artists_ids_list)):
 
 combined_EdgeLists = edgeLists[0] #the first edgelist!
 for i in range(len(edgeLists)):
-    combined_EdgeLists = combineEdgelists(combined_EdgeLists, edgeLists[i]) #adding edgeList to combined list
+    combined_EdgeLists = combineEdgeLists(combined_EdgeLists, edgeLists[i]) #adding edgeList to combined list
 combined_EdgeLists.columns = ['artist1', 'artist2']
 
 #print combined_EdgeLists
