@@ -9,7 +9,7 @@ from pprint import pprint
 
 
 
-dbname="playlists"
+dbname="facebook"
 host="localhost"
 user="root"
 passwd=""
@@ -51,7 +51,7 @@ def createAttributesTable(json_file):
         friend_attribute_list.append(tupl)
 
     cur = db.cursor()
-    cur.execute('''CREATE TABLE IF NOT EXISTS friend_attributes (id INTEGER PRIMARY KEY AUTO_INCREMENT, uid INTEGER, first_name VARCHAR(128), middle_name VARCHAR(128), last_name VARCHAR(128), pic VARCHAR(255), religion VARCHAR(128), birthday_date INTEGER, sex VARCHAR(64), hometown_location VARCHAR(128), current_location VARCHAR(128), relationship_status VARCHAR(64), significant_other_id INTEGER, political VARCHAR(128), locale VARCHAR(64), profile_url VARCHAR(255), website VARCHAR(128));''')
+    cur.execute('''CREATE TABLE IF NOT EXISTS friend_attributes (id INTEGER PRIMARY KEY AUTO_INCREMENT, uid VARCHAR(128), first_name VARCHAR(128), middle_name VARCHAR(128), last_name VARCHAR(128), pic VARCHAR(255), religion VARCHAR(128), birthday_date VARCHAR(128), sex VARCHAR(64), hometown_location VARCHAR(128), current_location VARCHAR(128), relationship_status VARCHAR(64), significant_other_id VARCHAR(128), political VARCHAR(128), locale VARCHAR(64), profile_url VARCHAR(255), website VARCHAR(255));''')
 
     insertQuery = '''INSERT INTO friend_attributes (uid, first_name, middle_name, last_name, pic, religion, birthday_date, sex, hometown_location, current_location, relationship_status, significant_other_id, political, locale, profile_url, website)
                          VALUES (%s, %s, %s, %s,%s, %s, %s, %s,%s, %s, %s, %s,%s, %s, %s, %s)'''
