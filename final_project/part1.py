@@ -32,8 +32,14 @@ def createAttributesTable(json_file):
         religion = friend["religion"]
         birthday_date = friend["birthday_date"]
         sex = friend["sex"]
-        hometown_location = friend["hometown_location"]
-        current_location = friend["current_location"]
+        if friend["hometown_location"] == None:
+            hometown_location = friend["hometown_location"]
+        else:
+            hometown_location = friend["hometown_location"]["name"]
+        if friend["current_location"] == None:
+            current_location = friend["current_location"]
+        else:
+            current_location = friend["current_location"]["name"]
         relationship_status = friend["relationship_status"]
         significant_other_id = friend["significant_other_id"]
         political = friend["political"]
@@ -47,7 +53,7 @@ def createAttributesTable(json_file):
     cur = db.cursor()
     cur.execute('''CREATE TABLE IF NOT EXISTS friend_attributes (id INTEGER PRIMARY KEY AUTO_INCREMENT, uid INTEGER, first_name VARCHAR(128), middle_name VARCHAR(128), last_name VARCHAR(128), pic VARCHAR(255), religion VARCHAR(128), birthday_date INTEGER, sex VARCHAR(64), hometown_location VARCHAR(128), current_location VARCHAR(128), relationship_status VARCHAR(64), significant_other_id INTEGER, political VARCHAR(128), locale VARCHAR(64), profile_url VARCHAR(255), website VARCHAR(128));''')
 
-    insertQuery = '''INSERT INTO friend_attributes (uid, first_name, middle_name, last_name, pic, religion, birthday_date, sex, hometown_location, current_location, relationship_status, significant_other_id, political, locale, profile_url, website) \n
+    insertQuery = '''INSERT INTO friend_attributes (uid, first_name, middle_name, last_name, pic, religion, birthday_date, sex, hometown_location, current_location, relationship_status, significant_other_id, political, locale, profile_url, website)
                          VALUES (%s, %s, %s, %s,%s, %s, %s, %s,%s, %s, %s, %s,%s, %s, %s, %s)'''
 
     cur.executemany(insertQuery, friend_attribute_list)
